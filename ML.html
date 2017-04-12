@@ -28515,7 +28515,7 @@ height=250
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Use the previously trained random forest classifier to classify the input satellite image. Using the classified image, prepare a mask which contains only the water and vegetation pixels (class II pixels). Afterwards, use this mask to mask out the clustered image (see above) and thereby isolate the building and road pixels (class I pixels) in it.</p>
+<p>Use the previously trained random forest classifier to classify the input satellite image.</p>
 
 </div>
 </div>
@@ -28541,7 +28541,6 @@ height=250
 <span class="n">result</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">flat_pixels</span><span class="p">)</span>
 <span class="n">classification</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
 
-<span class="c"># Save classified image</span>
 <span class="n">imsave</span><span class="p">(</span><span class="s">&quot;classified.tif&quot;</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
 
 <span class="c"># Display classified image</span>
@@ -31996,12 +31995,8 @@ height=250
 <div class=" highlight hl-ipython3"><pre><span class="n">vegetationImg</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;classified.tif&quot;</span><span class="p">);</span>
 <span class="n">img2gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">vegetationImg</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
 <span class="n">ret</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">img2gray</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
-<span class="n">mask_inv</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_not</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
-<span class="n">imsave</span><span class="p">(</span><span class="s">&quot;veg.tif&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;kmeans.tif&#39;</span><span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-
-<span class="c"># Save masked image</span>
 <span class="n">imsave</span><span class="p">(</span><span class="s">&quot;masked.tif&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 
 <span class="c"># Display masked image</span>
